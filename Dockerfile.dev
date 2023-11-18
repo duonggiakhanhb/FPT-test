@@ -1,0 +1,10 @@
+FROM pyspark
+
+RUN apt-get update && \
+    apt-get install -y git
+
+COPY ./aws-credentials /root/.aws/credentials
+
+WORKDIR /app
+
+CMD ["bash"]

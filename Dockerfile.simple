@@ -1,0 +1,7 @@
+# Use a base image, for example, Python
+FROM python:3.9
+
+
+# Define the command to run your application
+# Print Python version
+CMD ["bash", "-c", "python3 --version; tail -f /dev/null"]

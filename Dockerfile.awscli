@@ -1,0 +1,16 @@
+# Use a base image with Python installed
+FROM python:3.9
+
+# Install AWS CLI and its dependencies
+RUN apt-get update && \
+    apt-get install -y curl unzip && \
+    apt-get install -y git && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install -i /usr/local/aws-cli -b /usr/local/bin
+
+# Copy AWS credentials file
+COPY aws-credentials /root/.aws/credentials
+
+# Set the entrypoint for using AWS CLI commands
+CMD ["bash", "-c", "aws --version; tail -f /dev/null"]

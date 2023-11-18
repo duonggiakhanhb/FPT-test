@@ -1,0 +1,20 @@
+FROM python:3.9-slim-buster
+WORKDIR /home/docker/
+
+RUN apt-get update && \
+    apt-get update && apt-get -y install sudo && \
+    apt-get install wget -y && apt-get install curl -y && \
+    apt-get install nano && \
+    apt-get install openjdk-11-jdk -y
+    # wget "https://dlcdn.apache.org/spark/spark-3.3.1/spark-3.3.1-bin-hadoop3.tgz" && \
+    # mkdir /opt/spark && \
+    # tar -xf spark-3.3.1-bin-hadoop3.tgz -C /opt/spark --strip-component && \
+    # chmod -R 777 /opt/spark && \
+    # echo 'SPARK_HOME=/opt/spark' >> ~/.bashrc && \
+    # echo 'PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin' >> ~/.bashrc && \
+    # echo 'PYSPARK_PYTHON=/usr/bin/python3' >> ~/.bashrc && \
+    # ~/.bashrc
+
+
+RUN pip3 install pyspark findspark
+CMD ["bash", "-c", "python3 -c 'import pyspark; print(pyspark.__version__)'; tail -f /dev/null"]
